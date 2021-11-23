@@ -16,6 +16,7 @@ public class UserAccount {
     /**
      * The name of a user.
      */
+
     private final String username;
 
     public UserAccount(int id, String username) {

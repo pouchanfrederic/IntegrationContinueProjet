@@ -167,7 +167,6 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
     }
 
     /* **************************** User part *********************/
-
     /**
      * {@inheritDoc}
      */
@@ -182,7 +181,7 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
     @Override
     public UserInfo login(String userName) {
         final UserInfo user = new UserInfo(
-                findUser(userName).orElse(new UserAccount(0, userName)),
+                findUser(userName).orElse(new UserAccount(this.getNewAvailableID(), userName)),
                 Status.ACTIVE // user just logged in - status is active
         );
         notifyUserChange(user);
@@ -223,6 +222,39 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
                         .collect(Collectors.toSet()))
                 // if getUsers() returns null - return an empty set
                 .orElse(Collections.emptySet());
+    }
+
+    /**
+     * Gets an available id number based on the list of users
+     * @return an available id for a new user
+     */
+    public int getNewAvailableID(){
+
+        Collection<UserInfo> UsersList = this.getUsers();
+
+        int newAvailableID = UsersList.size() + 1;
+
+        while(!verifyIfIDExists(newAvailableID)){
+            newAvailableID+=1;
+        }
+        return newAvailableID;
+    }
+
+    /**
+     * Verify if the id sent already exists or not
+     * @param IDToTest
+     * @return if the id is usable or not
+     */
+    public boolean verifyIfIDExists(int IDToTest) {
+        Collection<UserInfo> UsersList = this.getUsers();
+        boolean isIDAvailable = true;
+
+        for (UserInfo user : UsersList) {
+            if (IDToTest == user.getAccount().getId()) {
+                isIDAvailable = false;
+            }
+        }
+        return isIDAvailable;
     }
 
     /**
