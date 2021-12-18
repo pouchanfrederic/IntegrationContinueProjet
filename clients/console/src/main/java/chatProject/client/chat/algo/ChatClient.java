@@ -244,6 +244,9 @@ public class ChatClient<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
      * @param chatroomName the name of the chatroom to create
      */
     public void createChatroomFromCurrentUser(String chatroomName) {
+        if (getCurrentChatroomNames().contains(chatroomName)){
+            return;
+        }
         addChatroom(chatroomName, currentUser);
     }
 
