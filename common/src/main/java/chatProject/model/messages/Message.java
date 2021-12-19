@@ -2,6 +2,8 @@ package chatProject.model.messages;
 
 import chatProject.model.user.UserInfo;
 
+import java.util.UUID;
+
 
 /**
  * A model for a message sent in the chat.
@@ -13,27 +15,29 @@ public class Message<T> {
     /**
      * The ID of the message (unique).
      */
-    private final int id;
+    private final String id;
     /**
      * The sender of the message.
      */
     private final MessageOwnerConcrete sender;
+
     /**
      * The content of the message.
      */
     private final T content;
 
-    public Message(int id, UserInfo sender, T content) {
-        this.id = id;
+    public Message(UserInfo sender, T content) {
+        this.id = UUID.randomUUID().toString();;
         this.sender = (sender == null) ? null : new MessageOwnerConcrete(sender.getAccount(), sender.getCurrentStatus());
         this.content = content;
+
     }
 
     /**
      * Gets the ID of the message.
      * @return the message unique ID
      */
-    public int getId() {
+    public String getId() {
         return id;
     }
 

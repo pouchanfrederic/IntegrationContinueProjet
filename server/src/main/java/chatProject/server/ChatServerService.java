@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import static spark.Spark.*;
 
 /**
+ * TODO: No need to test this class
  * A class that exposes the Web services of the server.
  * Based on the Spark Java library.
  * @param <T> the type of messages to use (probably String)

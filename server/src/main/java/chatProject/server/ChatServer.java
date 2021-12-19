@@ -53,6 +53,8 @@ public class ChatServer<T> implements UserAlgo, ChatroomAlgo<T>, MessageAlgo<T>,
      */
     private Thread checkIdleClients = null;
 
+    private int lastMessageID = 0;
+
     public ChatServer(ChatInstance<T> chatInstance,
                       Collection<ClientNotifierInterface<T>> clientNotifiers,
                       Gson json) {

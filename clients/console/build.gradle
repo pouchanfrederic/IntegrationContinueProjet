@@ -1,3 +1,8 @@
+plugins {
+    // central reports in ./build/buildDashboard
+    id 'build-dashboard'
+}
+
 application {
     // the main class to run
     mainClassName = 'chatProject.client.Main'
