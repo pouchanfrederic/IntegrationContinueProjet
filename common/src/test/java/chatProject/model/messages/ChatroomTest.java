@@ -44,4 +44,20 @@ public class ChatroomTest {
         assertEquals(sizeBefore +1, sizeAfter);
     }
 
+    @Test
+    public void addMessageTwo() {
+        Chatroom chatroomTest = new Chatroom("testName", FakeInstances.DUMMY_ACTIVE_USER, new ArrayList<>(
+                asList(FakeInstances.DUMMY_MESSAGE_1)));
+
+        int sizeBefore = chatroomTest.getCurrentMessages().size();
+
+        chatroomTest.addMessage(new Message<Object>(FakeInstances.DUMMY_ACTIVE_USER, "Coucou"));
+
+        int sizeAfter = chatroomTest.getCurrentMessages().size();
+
+        assertEquals(sizeBefore +1, sizeAfter);
+    }
+
+
+
 }
